@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 
 
@@ -15,45 +16,9 @@ class TopNavigation extends Component {
             </div>
             <div className="navbar-collapse collapse" id="navbar">
                 <ul className="nav navbar-nav">
-                    <li className="active">
-                        <a aria-expanded="false" role="button" href="layouts.html"> Back to main Layout page</a>
-                    </li>
-                    <li className="dropdown">
-                        <a aria-expanded="false" role="button" href="" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
-                        <ul role="menu" className="dropdown-menu">
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                        </ul>
-                    </li>
-                    <li className="dropdown">
-                        <a aria-expanded="false" role="button" href="" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
-                        <ul role="menu" className="dropdown-menu">
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                        </ul>
-                    </li>
-                    <li className="dropdown">
-                        <a aria-expanded="false" role="button" href="" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
-                        <ul role="menu" className="dropdown-menu">
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                        </ul>
-                    </li>
-                    <li className="dropdown">
-                        <a aria-expanded="false" role="button" href="" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
-                        <ul role="menu" className="dropdown-menu">
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                            <li><a href="">Menu item</a></li>
-                        </ul>
-                    </li>
+                    <li><Link to='/'>Home</Link></li>
+                    <li><Link to='/detail'>Roster</Link></li>
+
 
                 </ul>
                 <ul className="nav navbar-top-links navbar-right">

@@ -5,14 +5,34 @@ class Circles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            circles: this.props.circles
+            contacts: this.props.contacts,
+            circleList: []
         }
+
     }
 
-    newCircle() {
-        console.log('Adding a new Circle')
+    componentDidMount() {
+        let item = []
+        let circleList = this.state.contacts.map((contact) => {
+            if (contact.circles.length > 0) {
+               let items = contact.circles.map((circle) => {
+                   console.log(circle)
+                    let name  = circle.name;
+                    let count = 1
+                    if (item[circle.name]) {
+                        item[circle.name] += 1
+                    } else {
+                        item[circle.name] = 1
+                    }
+                    return {name, count}
+                })
+            }
+        })
+        console.log(typeof item)
+        this.setState({ circleList: item })
     }
     render() {
+        console.log('This is the list: ', this.state.circleList)
         return (
             <div className="ibox float-e-margins">
                 <div className="ibox-title">
@@ -25,7 +45,9 @@ class Circles extends Component {
                     </div>
                 </div>
                 <div className="ibox-content">
-                <p>Circle</p>
+                    {Object.keys(this.state.circleList).forEach( (item) => {
+                            return <li> {item} </li>
+                    })}
                 </div>
             </div>
 

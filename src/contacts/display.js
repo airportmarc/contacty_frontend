@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class ContactsDisplay extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class ContactsDisplay extends Component {
         const searchTerm = evt.target.value;
         if(searchTerm.length > 0)
         {
-            searchedContacts = this.state.orignalContacts.filter( (contact) => contact.first_name.includes(searchTerm) || contact.last_name.includes(searchTerm) )
+            searchedContacts = this.state.orignalContacts.filter( (contact) => contact.first_name.toLowerCase().includes(searchTerm.toLowerCase()) || contact.last_name.includes(searchTerm.toLowerCase()) )
         }
         this.setState({filteredContacts: searchedContacts})
 
@@ -67,13 +68,16 @@ class ContactsDisplay extends Component {
                             <tbody>
                                 {this.state.filteredContacts.map(function (contact, idx) {
                                     return (
+
                                         <tr key={idx}>
-                                            <td>{contact.first_name}</td>
+
+                                            <td><Link to={`/detail/${contact.pk}`}>{contact.first_name} </Link></td>
                                             <td>{contact.last_name}</td>
                                             <td>{contact.phone}</td>
                                             <td>{contact.email}</td>
                                             <td>{contact.country}</td>
                                         </tr>
+
                                 )})}
 
 

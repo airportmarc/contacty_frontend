@@ -1,112 +1,189 @@
 export default [
     {
-      "pk": 1,
-      "first_name": "Fern",
-      "last_name": "Ware",
-      "phone": "(876) 449-3406",
-      "email": "fernware@optique.com",
-      "country": "Norfolk Island",
-      "state": "South Carolina",
-      "city": "Derwood",
-      "street": "7899 Robert Street"
+        "pk": 1,
+        "first_name": "Tucker",
+        "last_name": "Kane",
+        "phone": "(954) 570-2624",
+        "email": "tuckerkane@parleynet.com",
+        "country": "Central African Republic",
+        "state": "Idaho",
+        "city": "Belfair",
+        "street": "5446 Anchorage Place",
+        "circles": [
+            {
+                1: {
+                    "name": "Family",
+                }
+            }
+        ]
     },
     {
-      "pk": 2,
-      "first_name": "Raymond",
-      "last_name": "Callahan",
-      "phone": "(814) 580-3135",
-      "email": "raymondcallahan@optique.com",
-      "country": "Angola",
-      "state": "Pennsylvania",
-      "city": "Bentonville",
-      "street": "6080 McDonald Avenue"
+        "pk": 2,
+        "first_name": "Brittney",
+        "last_name": "Wood",
+        "phone": "(809) 512-2670",
+        "email": "brittneywood@parleynet.com",
+        "country": "Finland",
+        "state": "North Carolina",
+        "city": "Noblestown",
+        "street": "1221 Dahlgreen Place",
+        "circles": [
+            {
+                2: {
+                    "name": "Teammates"
+                }
+            },
+            {
+                3: {  "name": "Co-workers"  }
+            },
+        ]
     },
     {
-      "pk": 3,
-      "first_name": "Gould",
-      "last_name": "Tate",
-      "phone": "(993) 528-2248",
-      "email": "gouldtate@optique.com",
-      "country": "Seychelles",
-      "state": "Idaho",
-      "city": "Goodville",
-      "street": "6338 Vandalia Avenue"
+        "pk": 3,
+        "first_name": "Davis",
+        "last_name": "Acevedo",
+        "phone": "(807) 554-3369",
+        "email": "davisacevedo@parleynet.com",
+        "country": "Sweden",
+        "state": "New Hampshire",
+        "city": "Orovada",
+        "street": "5947 Clifford Place",
+        "circles": [
+            {
+               2: { "name": "Teammates"}
+            },
+            {
+                1: {"name": "Family",}
+            }
+        ]
     },
     {
-      "pk": 4,
-      "first_name": "Solis",
-      "last_name": "Bush",
-      "phone": "(941) 499-2278",
-      "email": "solisbush@optique.com",
-      "country": "Djibouti",
-      "state": "Alaska",
-      "city": "Urie",
-      "street": "9594 Anna Court"
+        "pk": 4,
+        "first_name": "Muriel",
+        "last_name": "Morton",
+        "phone": "(956) 448-3813",
+        "email": "murielmorton@parleynet.com",
+        "country": "France, Metropolitan",
+        "state": "Nevada",
+        "city": "Cavalero",
+        "street": "8306 Elton Street",
+        "circles": [
+            {
+                2: { "name": "Teammates"}
+            },
+            {
+                3: {  "name": "Co-workers"  }
+            }
+        ]
     },
     {
-      "pk": 5,
-      "first_name": "Jacqueline",
-      "last_name": "Conley",
-      "phone": "(960) 469-2771",
-      "email": "jacquelineconley@optique.com",
-      "country": "Indonesia",
-      "state": "Kansas",
-      "city": "Savannah",
-      "street": "4957 Erasmus Street"
+        "pk": 5,
+        "first_name": "Mcpherson",
+        "last_name": "Barry",
+        "phone": "(859) 427-3940",
+        "email": "mcphersonbarry@parleynet.com",
+        "country": "Swaziland",
+        "state": "District Of Columbia",
+        "city": "Chestnut",
+        "street": "8847 Balfour Place",
+        "circles": [
+            {
+                2: { "name": "Teammates"}
+            },
+            {
+                1: {"name": "Family"}
+            },
+            {
+                4: {"name": "Friends",}
+            }
+        ]
     },
     {
-      "pk": 6,
-      "first_name": "Pickett",
-      "last_name": "Sears",
-      "phone": "(977) 422-2970",
-      "email": "pickettsears@optique.com",
-      "country": "Cyprus",
-      "state": "Nevada",
-      "city": "Clayville",
-      "street": "4438 Atlantic Avenue"
+        "pk": 6,
+        "first_name": "Della",
+        "last_name": "Joseph",
+        "phone": "(923) 525-3880",
+        "email": "dellajoseph@parleynet.com",
+        "country": "French Polynesia",
+        "state": "Kentucky",
+        "city": "Rosine",
+        "street": "778 Stockholm Street",
+        "circles": [
+            {
+                4: {"name": "Friends"}
+            },
+            {
+                3: {  "name": "Co-workers"  }
+            },
+        ]
     },
     {
-      "pk": 7,
-      "first_name": "Foster",
-      "last_name": "King",
-      "phone": "(906) 515-3191",
-      "email": "fosterking@optique.com",
-      "country": "Antarctica",
-      "state": "Texas",
-      "city": "Ona",
-      "street": "7683 Kings Hwy"
+        "pk": 7,
+        "first_name": "Barnett",
+        "last_name": "Kaufman",
+        "phone": "(886) 441-2790",
+        "email": "barnettkaufman@parleynet.com",
+        "country": "Peru",
+        "state": "Oregon",
+        "city": "Alfarata",
+        "street": "3461 Schenck Place",
+        "circles": [
+            {
+                4: {"name": "Friends"}
+            },
+            {
+                1: {"name": "Family"}
+            }
+        ]
     },
     {
-      "pk": 8,
-      "first_name": "Catherine",
-      "last_name": "Horn",
-      "phone": "(908) 459-2437",
-      "email": "catherinehorn@optique.com",
-      "country": "Kiribati",
-      "state": "Colorado",
-      "city": "Crawfordsville",
-      "street": "7318 Veronica Place"
+        "pk": 8,
+        "first_name": "Savage",
+        "last_name": "Parrish",
+        "phone": "(975) 414-3477",
+        "email": "savageparrish@parleynet.com",
+        "country": "Bolivia",
+        "state": "Guam",
+        "city": "Leming",
+        "street": "9994 Sharon Street",
+        "circles": []
     },
     {
-      "pk": 9,
-      "first_name": "Lidia",
-      "last_name": "Higgins",
-      "phone": "(855) 405-2667",
-      "email": "lidiahiggins@optique.com",
-      "country": "Qatar",
-      "state": "Michigan",
-      "city": "Roy",
-      "street": "1268 Harrison Avenue"
+        "pk": 9,
+        "first_name": "Leigh",
+        "last_name": "Gilbert",
+        "phone": "(860) 563-3319",
+        "email": "leighgilbert@parleynet.com",
+        "country": "Afghanistan",
+        "state": "Vermont",
+        "city": "Martinsville",
+        "street": "4822 Nassau Avenue",
+        "circles": [
+            {
+                1: {"name": "Family"}
+            },
+            {
+                "name": "Teammates"
+            },
+            {
+                4: {"name": "Friends"}
+            }
+        ]
     },
     {
-      "pk": 10,
-      "first_name": "Ramsey",
-      "last_name": "Garrison",
-      "phone": "(922) 591-2566",
-      "email": "ramseygarrison@optique.com",
-      "country": "Anguilla",
-      "state": "Delaware",
-      "city": "Shawmut",
-      "street": "7855 Nova Court"
+        "pk": 10,
+        "first_name": "Shepard",
+        "last_name": "Boyd",
+        "phone": "(969) 404-2150",
+        "email": "shepardboyd@parleynet.com",
+        "country": "St. Helena",
+        "state": "California",
+        "city": "Marbury",
+        "street": "1833 Bradford Street",
+        "circles": [
+            {
+                4: {"name": "Friends"}
+            }
+        ]
     }
-  ]
+]
