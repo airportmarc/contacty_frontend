@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import mockContacts from './data/mock_contact_data';
-import EventItem from './EventItem'
-import ax from './config/axios';
+import mockContacts from '../../data/mock_contact_data';
+import EventItem from '../../Components/EventItem'
+import ax from '../../config/axios';
 import detail from './Detail.css'
 
 class Detail extends Component {
@@ -14,7 +14,6 @@ class Detail extends Component {
             events: []
 
         }
-
         let temp = []
         temp = mockContacts.filter((item) => {
             if (item.pk == props.match.params.number) {

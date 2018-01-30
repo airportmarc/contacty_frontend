@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import Circles from './Circles';
-import mockContacts from './data/mock_contact_data';
-import Contacts from './contacts/display';
+import Circles from '../../Components/Circles';
+import mockContacts from '../../data/mock_contact_data';
+import Contacts from '../../Components/contacts/display';
 
 class Dashboard extends Component {
     constructor(props) {

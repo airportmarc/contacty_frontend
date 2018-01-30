@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 
-import TopNav from './Nav';
-import Dashboard from './dashboard';
-import Detail from './Detail';
+import TopNav from '../Components/Nav';
+import Dashboard from './Dashboard/dashboard';
+import Detail from './Detail/Detail';
 
 
 
