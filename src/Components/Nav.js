@@ -18,6 +18,7 @@ class TopNavigation extends Component {
                 <ul className="nav navbar-nav">
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/detail'>Roster</Link></li>
+                    <li><Link to='/new'>New User</Link></li>
 
 
                 </ul>

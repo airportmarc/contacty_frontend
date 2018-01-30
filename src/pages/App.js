@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import TopNav from '../Components/Nav';
 import Dashboard from './Dashboard/dashboard';
 import Detail from './Detail/Detail';
+import NewContact from './NewContact/NewContact';
 
 
 
@@ -19,6 +20,7 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' component={Dashboard} />
                 <Route exact path='/detail/:number' render={(routeProps)=> <Detail {...routeProps} />} />
+                <Route exact path='/new/' component={NewContact} />} />
               </Switch>
             </div>
           </div>
