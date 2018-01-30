@@ -11,7 +11,7 @@ class TopNavigation extends Component {
                 <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" className="navbar-toggle collapsed" type="button">
                     <i className="fa fa-reorder"></i>
                 </button>
-                <a href="#" className="navbar-brand">Inspinia</a>
+                <a href="" className="navbar-brand">Inspinia</a>
             </div>
             <div className="navbar-collapse collapse" id="navbar">
                 <ul className="nav navbar-nav">
@@ -19,7 +19,7 @@ class TopNavigation extends Component {
                         <a aria-expanded="false" role="button" href="layouts.html"> Back to main Layout page</a>
                     </li>
                     <li className="dropdown">
-                        <a aria-expanded="false" role="button" href="#" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
                         <ul role="menu" className="dropdown-menu">
                             <li><a href="">Menu item</a></li>
                             <li><a href="">Menu item</a></li>
@@ -28,7 +28,7 @@ class TopNavigation extends Component {
                         </ul>
                     </li>
                     <li className="dropdown">
-                        <a aria-expanded="false" role="button" href="#" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
                         <ul role="menu" className="dropdown-menu">
                             <li><a href="">Menu item</a></li>
                             <li><a href="">Menu item</a></li>
@@ -37,7 +37,7 @@ class TopNavigation extends Component {
                         </ul>
                     </li>
                     <li className="dropdown">
-                        <a aria-expanded="false" role="button" href="#" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
                         <ul role="menu" className="dropdown-menu">
                             <li><a href="">Menu item</a></li>
                             <li><a href="">Menu item</a></li>
@@ -46,7 +46,7 @@ class TopNavigation extends Component {
                         </ul>
                     </li>
                     <li className="dropdown">
-                        <a aria-expanded="false" role="button" href="#" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="" className="dropdown-toggle" data-toggle="dropdown"> Menu item <span className="caret"></span></a>
                         <ul role="menu" className="dropdown-menu">
                             <li><a href="">Menu item</a></li>
                             <li><a href="">Menu item</a></li>

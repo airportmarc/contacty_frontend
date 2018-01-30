@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './css/bootstrap.css';
 import './css/App.css';
 import './css/site.css';
 import Contacts from './contacts/display';
 import TopNav from './Nav';
 import Circles from './Circles';
+import mockContacts from './data/mock_contact_data';
 
 require('./font-awesome/css/font-awesome.min.css');
 
@@ -15,7 +15,7 @@ class App extends Component {
     this.state = {
       isCircleOpen: false,
       contactsClass: 'col-md-12',
-      contacts: [],
+      contacts: mockContacts
     }
     this.toggleCircle = this.toggleCircle.bind(this)
   }
@@ -38,6 +38,7 @@ class App extends Component {
                 <div className="ibox">
                   <div className="ibox-content">
                   <button className="btn btn-white" onClick={this.toggleCircle}> Toggle Circles</button>
+                  <button className="btn btn-white" onClick={this.addNew}> Add New Contact</button>
                   </div>
                 </div>
 

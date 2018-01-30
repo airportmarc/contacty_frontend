@@ -4,11 +4,22 @@ class ContactsDisplay extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            contacts: this.props.contacts
+            orignalContacts: this.props.contacts,
+            filteredContacts: this.props.contacts,
+            serarchTerm: ''
         }
+        this.doSearch = this.doSearch.bind(this)
     }
-    handleCicles() {
-        console.log('Circle open/close');
+
+    doSearch(evt) {
+        let searchedContacts = this.state.orignalContacts;
+        const searchTerm = evt.target.value;
+        if(searchTerm.length > 0)
+        {
+            searchedContacts = this.state.orignalContacts.filter( (contact) => contact.first_name.includes(searchTerm) || contact.last_name.includes(searchTerm) )
+        }
+        this.setState({filteredContacts: searchedContacts})
+
     }
     render() {
         return (
@@ -32,8 +43,12 @@ class ContactsDisplay extends Component {
                             </div>
                         </div>
                         <div className="col-sm-3">
-                            <div className="input-group"><input type="text" placeholder="Search" className="input-sm form-control" /> <span className="input-group-btn">
-                                <button type="button" className="btn btn-sm btn-primary"> Go!</button> </span></div>
+                            <div className="input-group">
+                            <input onKeyUp={ (evt) => this.doSearch(evt)}
+                                   value={this.state.searchTerm}
+                             type="text"
+                             placeholder="Search"
+                             className="input-sm form-control"  /></div>
                         </div>
                     </div>
                     <div className="table-responsive">
@@ -41,29 +56,27 @@ class ContactsDisplay extends Component {
                             <thead>
                                 <tr>
 
-                                    <th>#</th>
-                                    <th>Project </th>
-                                    <th>Name </th>
-                                    <th>Phone </th>
-                                    <th>Company </th>
-                                    <th>Completed </th>
-                                    <th>Task</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th>First Name</th>
+                                    <th>Last Name </th>
+                                    <th>Phone</th>
+                                    <th>Email </th>
+                                    <th>Country </th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Project <small>This is example of project</small></td>
-                                    <td>Patrick Smith</td>
-                                    <td>0800 051213</td>
-                                    <td>Inceptos Hymenaeos Ltd</td>
-                                    <td><span className="pie">0.52/1.561</span></td>
-                                    <td>20%</td>
-                                    <td>Jul 14, 2013</td>
-                                    <td><a href="#"><i className="fa fa-check text-navy"></i></a></td>
-                                </tr>
+                                {this.state.filteredContacts.map(function (contact, idx) {
+                                    return (
+                                        <tr key={idx}>
+                                            <td>{contact.first_name}</td>
+                                            <td>{contact.last_name}</td>
+                                            <td>{contact.phone}</td>
+                                            <td>{contact.email}</td>
+                                            <td>{contact.country}</td>
+                                        </tr>
+                                )})}
+
+
                             </tbody>
                         </table>
                     </div>
