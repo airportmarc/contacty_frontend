@@ -17,15 +17,18 @@ class Detail extends Component {
             events: [],
             isModelOpen: false,
             actionType: '',
-            sendTo: ''
+            sendTo: '',
+            isAddItemOpen: false,
+            addItemStyle: '',
 
         }
 
         this.makeAction = this.makeAction.bind(this)
-        this.updateMessage = this.updateMessage.bind(this)
+        this.updateInput = this.updateInput.bind(this)
         this.Delete = this.Delete.bind(this)
         this.addEvent = this.addEvent.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
+        this.openAddItem = this.openAddItem.bind(this)
     }
 
     componentDidMount() {
@@ -39,6 +42,12 @@ class Detail extends Component {
             console.log(res.data)
             this.setState({contact: res.data})
         })
+
+    }
+
+    openAddItem(style) {
+
+        this.setState({isAddItemOpen: true, addItemStyle: style})
 
     }
 
@@ -66,12 +75,12 @@ class Detail extends Component {
         this.setState({ events: currentEvent })
     }
 
-    updateMessage(evt){
-        const message = evt.target.value
-        this.setState({message})
-
+    updateInput(evt){
+        const value = evt.target.value
+        this.setState({message: value})
     }
     makeAction(type) {
+
         this.setState({isModelOpen: true, actionType: type})
         //this.addEvent(type, this.state.message)
     }
@@ -91,6 +100,44 @@ class Detail extends Component {
                     return <li key={email.id}>{email.email} <i className="fa fa-minus"  onClick={ () => this.deleteItem('email', email.id)}></i></li>
         })
         }
+
+        let closeModal = () => this.setState({ isModelOpen: false, isAddItemOpen: false, message: '' })
+
+        let saveAndCloseAdditem = () => {
+            let payload = {}
+            if (this.state.addItemStyle == 'email') {
+                payload = {
+                    email: this.state.message
+                }
+            } else {
+                payload = {
+                    number: this.state.message
+                }
+            }
+
+            ax.post(`/users/${this.props.match.params.number}/${this.state.addItemStyle}`, payload)
+            .then(res => {
+                const stylePlural = [this.state.addItemStyle + 's'][0]
+                const TempContact = Object.assign({}, this.state.contact)
+                TempContact.contact[stylePlural].push(res.data)
+                this.setState({contact: TempContact, messsage: '', isAddItemOpen: false})
+            })
+        }
+
+        let saveAndCloseMakeAction = () => {
+            const payload = {
+                message: this.state.message,
+                style: this.state.style,
+                sendTo: this.state.sendTo
+            }
+
+            ax.post('/makeAction', payload)
+            .then(res => {
+                this.setState({isModelOpen: false})
+            })
+
+      }
+
         return (
         <div className="row animated fadeInRight">
                 <div className="col-md-4">
@@ -134,9 +181,9 @@ class Detail extends Component {
                             <h5>Details</h5>
                         </div>
                         <div className="ibox-content">
-                        <p>Phones <i className="fa fa-plus" onClick={this.addNumber}></i></p>
+                        <p>Phones <i className="fa fa-plus" onClick={() => this.openAddItem('phone')}></i></p>
                         {phoneList}
-                        <p>Emails <i className="fa fa-plus"  onClick={this.addNumber}></i> </p>
+                        <p>Emails <i className="fa fa-plus"  onClick={() => this.openAddItem('email')}></i> </p>
                         {emailList}
                         </div>
                 </div>
@@ -159,6 +206,51 @@ class Detail extends Component {
 
                 </div>
             </div>
+            <div>
+
+        <Modal
+          show={this.state.isModelOpen}
+          onHide={closeModal}
+          aria-labelledby="ModalHeader"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id='ModalHeader'>Send a message</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <textaera onChange={this.updateInput} value={this.state.message}></textaera>
+          </Modal.Body>
+          <Modal.Footer>
+
+            <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
+
+            <button className='btn btn-primary' onClick={saveAndCloseMakeAction}>
+              Save
+            </button>
+          </Modal.Footer>
+        </Modal>
+
+        <div>
+
+        <Modal
+          show={this.state.isAddItemOpen}
+          onHide={closeModal}
+          aria-labelledby="ModalHeader"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id='ModalHeader'>Add a new Item</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <input type="text" name="addItemValue" value={this.state.message} onChange={this.updateInput} />
+          </Modal.Body>
+          <Modal.Footer>
+            <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
+            <button className='btn btn-primary' onClick={saveAndCloseAdditem}>
+              Save
+            </button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+      </div>
             </div>
 
         )}
