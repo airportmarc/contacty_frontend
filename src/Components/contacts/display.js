@@ -10,8 +10,15 @@ class ContactsDisplay extends Component {
             serarchTerm: ''
         }
         this.doSearch = this.doSearch.bind(this)
+        console.log(this.state.orignalContacts)
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        this.state.contacts = nextProps.contacts
+        nextState.orignalContacts = nextState.contacts
+        nextState.filteredContacts = nextState.contacts
+        console.log('Incoming', nextState)
+    }
     doSearch(evt) {
         let searchedContacts = this.state.orignalContacts;
         const searchTerm = evt.target.value;
@@ -60,8 +67,7 @@ class ContactsDisplay extends Component {
                                     <th>First Name</th>
                                     <th>Last Name </th>
                                     <th>Phone</th>
-                                    <th>Email </th>
-                                    <th>Country </th>
+                                    <th>Email </th
 
                                 </tr>
                             </thead>
@@ -71,11 +77,10 @@ class ContactsDisplay extends Component {
 
                                         <tr key={idx}>
 
-                                            <td><Link to={`/detail/${contact.pk}`}>{contact.first_name} </Link></td>
+                                            <td><Link to={`/detail/${contact.id}`}>{contact.first_name} </Link></td>
                                             <td>{contact.last_name}</td>
-                                            <td>{contact.phone}</td>
+                                            <td>{contact.contact.phones[0].number}</td>
                                             <td>{contact.email}</td>
-                                            <td>{contact.country}</td>
                                         </tr>
 
                                 )})}

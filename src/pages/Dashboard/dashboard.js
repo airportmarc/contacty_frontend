@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import ax from '../../config/axios'
 
 import Circles from '../../Components/Circles';
-import mockContacts from '../../data/mock_contact_data';
+//import mockContacts from '../../data/mock_contact_data';
 import Contacts from '../../Components/contacts/display';
 
 class Dashboard extends Component {
@@ -10,9 +11,24 @@ class Dashboard extends Component {
         this.state = {
             isCircleOpen: false,
             contactsClass: 'col-md-12',
-            contacts: mockContacts,
+            contacts: [],
         }
         this.toggleCircle = this.toggleCircle.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
+    }
+
+    componentDidMount() {
+        const payload = {
+            params: {
+                limit: 15
+            }
+        }
+        ax.get('/users', payload )
+        .then(res => {
+            console.log(res.data)
+            this.setState({contacts: res.data})
+        })
+
     }
 
     toggleCircle() {

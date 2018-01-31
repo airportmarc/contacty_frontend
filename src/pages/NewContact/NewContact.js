@@ -8,15 +8,14 @@ class NewContact extends Component {
     constructor(props){
         super(props)
         this.state = {
-            first_name: '',
-            last_name: '',
-            organization: '',
-            email: '',
-            phone: '',
-            address: '',
-            emailType: 'Personal',
-            phoneType: 'Mobile',
-            addressType: 'Home',
+            user: {
+                first_name: '',
+                last_name: '',
+                organization: '',
+                email: '',
+                phone: '',
+                address: '',
+            },
             options: ['Personal', 'Mobile', 'Home'],
             emails: [],
             required: ['first_name', 'last_name']
@@ -31,7 +30,9 @@ class NewContact extends Component {
     handleInput(evt) {
         const name = evt.target.name
         const value = evt.target.value
-        this.setState({[name]: value})
+        let temp = Object.assign({}, this.state.user);
+        temp[name] = value;
+        this.setState({user: temp})
         }
 
 
@@ -39,7 +40,7 @@ class NewContact extends Component {
 
         console.log(this.state)
         const payload = {
-            first_name: 'Hi'
+            user: this.state.user
         }
         ax.post('/users', payload)
 
@@ -58,33 +59,33 @@ class NewContact extends Component {
                                     <div className="col-sm-10"><input
                                     type="text" className="form-control"
                                     placeholder="First Name" name="first_name"
-                                    value={this.state.first_name} onChange={this.handleInput} /></div>
+                                    value={this.state.user.first_name} onChange={this.handleInput} /></div>
                                 </div>
                                 <div className="hr-line-dashed"></div>
                                 <div className="form-group"><label className="col-sm-2 control-label" >Last Name</label>
                                     <div className="col-sm-10">
                                     <input type="text" className="form-control"
                                     placeholder="Last Name" name="last_name"
-                                    value={this.state.last_name} onChange={this.handleInput}/></div>
+                                    value={this.state.user.last_name} onChange={this.handleInput}/></div>
                                 </div>
                                 <div className="hr-line-dashed"></div>
                                 <div className="form-group"><label className="col-sm-2 control-label">Organization</label>
                                     <div className="col-sm-10">
                                     <input type="text" placeholder="placeholder"
                                     className="form-control" name="organization"
-                                    value={this.state.organization} onChange={this.handleInput}/></div>
+                                    value={this.state.user.organization} onChange={this.handleInput}/></div>
                                 </div>
                                 <div className="hr-line-dashed"></div>
                                 <div className="form-group"><label className="col-sm-2 control-label">Bio</label>
                                     <div className="col-sm-10"><textarea className="form-control" name='bio'
-                                    value={this.state.bio} onChange={this.handleInput}></textarea></div>
+                                    value={this.state.user.bio} onChange={this.handleInput}></textarea></div>
                                 </div>
                                 <div className="hr-line-dashed"></div>
                                 <div className="form-group">
                                     <label className="col-sm-2 control-label">Phone</label>
                                     <div className="col-sm-10">
                                         <input type="text" className="form-control" name="phone"
-                                        value={this.state.phone} onChange={this.handleInput} />
+                                        value={this.state.user.phone} onChange={this.handleInput} />
                                     </div>
 
                                 </div>
@@ -93,7 +94,7 @@ class NewContact extends Component {
                                     <label className="col-sm-2 control-label">Email</label>
                                     <div className="col-sm-10">
                                         <input type="text" className="form-control"
-                                         name="email" value={this.state.email} onChange={this.handleInput} />
+                                         name="email" value={this.state.user.email} onChange={this.handleInput} />
                                     </div>
 
                                 </div>
@@ -103,7 +104,7 @@ class NewContact extends Component {
                                     <div className="col-sm-10">
 
                                         <input type="text" className="form-control" name="address"
-                                        value={this.state.address} onChange={this.handleInput} />
+                                        value={this.state.user.address} onChange={this.handleInput} />
                                     </div>
 
                                 </div>

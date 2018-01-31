@@ -4,6 +4,9 @@ import EventItem from '../../Components/EventItem'
 import ax from '../../config/axios';
 import detail from './Detail.css'
 
+let Modal = require('react-bootstrap-modal')
+
+
 class Detail extends Component {
     constructor(props) {
         super(props)
@@ -11,7 +14,10 @@ class Detail extends Component {
             contactId: props.match.params.number,
             contact: '',
             message: 'Test Message',
-            events: []
+            events: [],
+            isModelOpen: false,
+            actionType: '',
+            sendTo: ''
 
         }
         let temp = []
@@ -23,12 +29,12 @@ class Detail extends Component {
         })
         this.state.contact = temp[0]
 
-        this.makeCall = this.makeCall.bind(this)
-        this.makeText = this.makeText.bind(this)
-        this.makeEmail = this.makeEmail.bind(this)
+        this.makeAction = this.makeAction.bind(this)
+        this.updateMessage = this.updateMessage.bind(this)
         this.Delete = this.Delete.bind(this)
         this.addEvent = this.addEvent.bind(this)
     }
+
     addEvent(eventType, message) {
         let currentEvent = this.state.events.slice()
         const item = {
@@ -39,28 +45,33 @@ class Detail extends Component {
         currentEvent.push(item)
         this.setState({ events: currentEvent })
     }
-    makeCall() {
-        console.log("Making a Call")
-        const payload = {
-            sendto: this.state.contact.phone,
-            message: this.state.message
-        }
-        this.addEvent('call', this.state.message)
-        console.log(payload)
-        //console.log(ax.post('/1njy43x1', payload ))
+
+    updateMessage(evt){
+        const message = evt.target.value
+        this.setState({message})
+
     }
-    makeText() {
-        console.log("Making a Call")
-        this.addEvent('text', this.state.message)
+    makeAction(type) {
+        this.setState({isModelOpen: true, actionType: type})
+        //this.addEvent(type, this.state.message)
     }
-    makeEmail() {
-        console.log("Making a Call")
-        this.addEvent('email', this.state.message)
-    }
+
     Delete() {
         console.log("Making a Call")
     }
     render() {
+
+        let closeModel = () => this.setState({isModelOpen: false})
+
+        let sendAndClose = () => {
+            const payload = {
+                actionType: this.state.actionType,
+                sendTo: this.state.sendTo,
+                message: this.state.message
+            }
+            ax.post('/makeAction', payload)
+            .then( ()=> this.setState({isModelOpen: false}))
+        }
         return (
             <div className="wrapper wrapper-content animated fadeInRight">
                 <div className="row m-b-lg m-t-lg">
@@ -83,36 +94,23 @@ class Detail extends Component {
                         </div>
                     </div>
                     <div className="col-md-3">
-                        <table className="table small m-b-xs">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <strong>{this.state.contact.street}</strong>
-                                    </td>
-                                    <td>
-                                        <strong>{this.state.contact.city}</strong>
-                </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>{this.state.contact.country}</strong> Comments
-                </td>
-                                    <td>
-                                        <strong>54</strong> Articles
-                </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>154</strong> Tags
-                </td>
-                                    <td>
-                                        <strong>32</strong> Friends
-                </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div className="row">
+                            <div className="col-xs-3">
+                                <button className="btn btn-lg btn-primary action-buttons" onClick={this.makeAction}><i className="fa fa-phone"></i></button>
+                            </div>
+                            <div className="col-xs-3">
+                                <button className="btn btn-lg btn-primary action-buttons" onClick={this.makeAction}><i className="fa fa-mobile"></i></button>
+                            </div>
+                        </div>
+                    <div className="row">
+                            <div className="col-xs-3">
+                                <button className="btn btn-lg btn-primary action-buttons" onClick={this.makeEmail}><i className="fa fa-envelope"></i></button>
+                            </div>
+                            <div className="col-xs-3">
+                                <button className="btn btn-lg btn-warn action-buttons" onClick={this.makeDelete}> <i className="fa fa-close"></i></button>
+                            </div>
                     </div>
+                </div>
 
 
                 </div>
@@ -122,18 +120,12 @@ class Detail extends Component {
 
                         <div className="ibox">
                             <div className="ibox-content">
-                                <h3>About Alex Smith</h3>
+                                <h3>About {this.state.contact.first_name} {this.state.contact.last_name} </h3>
 
                                 <p className="small">
-                                    There are many variations of passages of Lorem Ipsum available, but the majority have
-                    suffered alteration in some form, by injected humour, or randomised words which don't.
-                                                       If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
-                    anything embarrassing
+                                   {this.state.contact.bio}
                 </p>
 
-                                <p className="small font-bold">
-                                    <span><i className="fa fa-circle text-navy"></i> Online status</span>
-                                </p>
 
                             </div>
                         </div>
@@ -143,53 +135,7 @@ class Detail extends Component {
                     </div>
 
                     <div className="col-lg-5">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div class="widget navy-bg p-lg text-center" onClick={this.makeCall}>
-                                    <div class="m-b-md">
-                                        <i class="fa fa-phone fa-4x"></i>
-                                        <h4 class="font-bold no-margins">
-                                            {this.state.contact.phone}
-                                        </h4>
-                                        <small>Call</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div class="widget navy-bg p-lg text-center" onClick={this.makeText}>
-                                    <div class="m-b-md">
-                                        <i class="fa fa-mobile fa-4x"></i>
-                                        <h4 class="font-bold no-margins">
-                                            {this.state.contact.phone}
-                                        </h4>
-                                        <small>Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div class="widget navy-bg p-lg text-center" onClick={this.makeEmail}>
-                                    <div class="m-b-md">
-                                        <i class="fa fa-phone fa-4x"></i>
-                                        <h6 class="font-bold no-margins">
-                                            {this.state.contact.email}
-                                        </h6>
-                                        <small>Email</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div class="widget navy-bg p-lg text-center" onClick={this.makeDelete}>
-                                    <div class="m-b-md">
-                                        <i class="fa fa-close fa-4x"></i>
-                                        <h4 class="font-bold no-margins">
-                                            Delete
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div className="col-lg-4 m-b-lg">
                         <div id="vertical-timeline" className="vertical-container light-timeline no-margins">
@@ -198,6 +144,29 @@ class Detail extends Component {
                         </div>
                     </div>
                 </div>
+                <Modal
+          show={this.state.isModelOpen}
+          onHide={closeModel}
+          aria-labelledby="ModalHeader"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id='ModalHeader'>Send a message</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+
+            <textarea value={this.state.message}  onChange={this.updateMessage}></textarea>
+          </Modal.Body>
+          <Modal.Footer>
+
+            <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
+
+            <button className='btn btn-primary' onClick={sendAndClose}>
+              Save
+            </button>
+          </Modal.Footer>
+        </Modal>
+
+
             </div>
         )
     }
