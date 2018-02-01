@@ -80,13 +80,25 @@ class Detail extends Component {
         this.setState({message: value})
     }
     makeAction(type) {
+        console.log(this.state.contact.contact.phones[0].number)
+
+        if(type == 'email') {
+            this.setState({sendTo: this.state.contact.contact.emails[0].email})
+        } else {
+            this.setState({sendTo: this.state.contact.contact.phones[0].number})
+        }
 
         this.setState({isModelOpen: true, actionType: type})
         //this.addEvent(type, this.state.message)
     }
 
     Delete() {
-        console.log("Making a Call")
+        if(window.confirm("Are you sure you would like to Delete this user?", )) {
+
+        ax.delete(`/users/${this.props.match.params.number}`).then((res) => {
+            this.props.history.push('/')
+        })
+    }
     }
     render() {
         let phoneList, emailList = 'No Information Availabile'
@@ -131,7 +143,7 @@ class Detail extends Component {
                 sendTo: this.state.sendTo
             }
 
-            ax.post('/makeAction', payload)
+            ax.post('/makeaction', payload)
             .then(res => {
                 this.setState({isModelOpen: false})
             })
@@ -167,7 +179,7 @@ class Detail extends Component {
                                             <button type="button" className="btn btn-default btn-sm btn-block" onClick={this.makeAction}><i className="fa fa-coffee"></i>Email</button>
                                         </div>
                                         <div className="col-md-3">
-                                            <button type="button" className="btn btn-default btn-sm btn-block" onClick={this.makeDelete}><i className="fa fa-coffee"></i>Delete</button>
+                                            <button type="button" className="btn btn-default btn-sm btn-block" onClick={this.Delete}><i className="fa fa-coffee"></i>Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -217,7 +229,7 @@ class Detail extends Component {
             <Modal.Title id='ModalHeader'>Send a message</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <textaera onChange={this.updateInput} value={this.state.message}></textaera>
+            <textarea onChange={this.updateInput} value={this.state.message}></textarea>
           </Modal.Body>
           <Modal.Footer>
 
