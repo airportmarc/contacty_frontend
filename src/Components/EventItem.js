@@ -38,14 +38,14 @@ class EventItem extends Component {
         return (
             <div className="vertical-timeline-block">
                 <div className="vertical-timeline-icon navy-bg">
-                    <i className={this.getIcon(this.state.item.event)}></i>
+                    <i className={this.getIcon(this.state.item.eventType)}></i>
                 </div>
 
                 <div className="vertical-timeline-content">
-                    <h2>{this.state.item.event}</h2>
+                    <h2>{this.state.item.eventType}</h2>
                     <p>{this.state.item.message}    </p>
                     <span className="vertical-date">
-                        {this.state.item.timestamp}
+                        {this.state.item.time}
                         <small>Dec 24</small>
                     </span>
                 </div>

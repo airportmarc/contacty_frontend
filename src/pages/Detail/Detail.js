@@ -20,6 +20,7 @@ class Detail extends Component {
             sendTo: '',
             isAddItemOpen: false,
             addItemStyle: '',
+            updateId: false
 
         }
 
@@ -29,6 +30,7 @@ class Detail extends Component {
         this.addEvent = this.addEvent.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
         this.openAddItem = this.openAddItem.bind(this)
+        this.editItem = this.editItem.bind(this)
     }
 
     componentDidMount() {
@@ -51,6 +53,12 @@ class Detail extends Component {
 
     }
 
+    editItem(style, id) {
+
+        this.setState({isAddItemOpen: true, updateId: id, addItemStyle: style })
+
+    }
+
     deleteItem(style, id) {
         console.log(style, id)
         const stylePlural = [style + 's'][0]
@@ -67,9 +75,9 @@ class Detail extends Component {
     addEvent(eventType, message) {
         let currentEvent = this.state.events.slice()
         const item = {
-            event: eventType,
+            eventType,
             message,
-            timestamp: new Date().toDateString()
+            time: new Date().toDateString()
         }
         currentEvent.push(item)
         this.setState({ events: currentEvent })
@@ -79,17 +87,17 @@ class Detail extends Component {
         const value = evt.target.value
         this.setState({message: value})
     }
-    makeAction(type) {
-        console.log(this.state.contact.contact.phones[0].number)
+    makeAction(eventType) {
+        console.log(eventType)
 
-        if(type == 'email') {
+        if(eventType == 'email') {
             this.setState({sendTo: this.state.contact.contact.emails[0].email})
         } else {
             this.setState({sendTo: this.state.contact.contact.phones[0].number})
         }
+        this.addEvent(eventType, this.state.message)
+        this.setState({isModelOpen: true, actionType: eventType})
 
-        this.setState({isModelOpen: true, actionType: type})
-        //this.addEvent(type, this.state.message)
     }
 
     Delete() {
@@ -104,12 +112,20 @@ class Detail extends Component {
         let phoneList, emailList = 'No Information Availabile'
         if(this.state.contact.contact && this.state.contact.contact.phones.length > 0) {
             phoneList  = this.state.contact.contact.phones.map( (phone, idx) => {
-            return <li key={phone.id}>{phone.number} <i className="fa fa-minus" onClick={ () => this.deleteItem('phone', phone.id)}></i></li>
+            return (<li key={phone.id}>{phone.number}
+                    <i className="fa fa-minus" onClick={ () => this.deleteItem('phone', phone.id)}></i>
+                    <i className="fa fa-pencil" onClick={ () => this.editItem('phone', phone.id)}></i>
+                    </li>
+            )
             })
         }
         if (this.state.contact.contact && this.state.contact.contact.emails.length > 0) {
             emailList  = this.state.contact.contact.emails.map( (email, idx) =>{
-                    return <li key={email.id}>{email.email} <i className="fa fa-minus"  onClick={ () => this.deleteItem('email', email.id)}></i></li>
+                    return (<li key={email.id}>{email.email}
+                             <i className="fa fa-minus"  onClick={ () => this.deleteItem('email', email.id)}></i>
+                             <i className="fa fa-pencil"  onClick={ () => this.editItem('email', email.id)}></i>
+                             </li>
+                    )
         })
         }
 
@@ -117,6 +133,9 @@ class Detail extends Component {
 
         let saveAndCloseAdditem = () => {
             let payload = {}
+            let update = ''
+            let method = 'post'
+            let isUpdating =  false
             if (this.state.addItemStyle == 'email') {
                 payload = {
                     email: this.state.message
@@ -127,11 +146,32 @@ class Detail extends Component {
                 }
             }
 
-            ax.post(`/users/${this.props.match.params.number}/${this.state.addItemStyle}`, payload)
+
+            if(this.state.updateId){
+                update = `/${this.state.updateId}`
+                method = 'patch'
+                isUpdating = true
+
+
+            }
+
+            ax[method](`/users/${this.props.match.params.number}/${this.state.addItemStyle}${update}`, payload)
             .then(res => {
                 const stylePlural = [this.state.addItemStyle + 's'][0]
                 const TempContact = Object.assign({}, this.state.contact)
-                TempContact.contact[stylePlural].push(res.data)
+                if (isUpdating) {
+                       TempContact.contact[stylePlural].map( (item, idx) => {
+                        console.log(res.data)
+                            if(item.id === res.data.id) {
+
+                                TempContact.contact[stylePlural][idx] = res.data
+                            }})
+                } else {
+                    TempContact.contact[stylePlural].push(res.data)
+                }
+
+
+
                 this.setState({contact: TempContact, messsage: '', isAddItemOpen: false})
             })
         }
@@ -170,13 +210,13 @@ class Detail extends Component {
                                 <div className="user-button">
                                     <div className="row">
                                         <div className="col-md-3">
-                                            <button type="button" className="btn btn-primary btn-sm btn-block" onClick={this.makeAction}><i className="fa fa-envelope"></i>Text</button>
+                                            <button type="button" className="btn btn-primary btn-sm btn-block" onClick={() => this.makeAction('text')}><i className="fa fa-envelope"></i>Text</button>
                                         </div>
                                         <div className="col-md-3">
-                                            <button type="button" className="btn btn-default btn-sm btn-block" onClick={this.makeAction}><i className="fa fa-coffee"></i>Call</button>
+                                            <button type="button" className="btn btn-default btn-sm btn-block" onClick={() => this.makeAction('call')}><i className="fa fa-coffee"></i>Call</button>
                                         </div>
                                         <div className="col-md-3">
-                                            <button type="button" className="btn btn-default btn-sm btn-block" onClick={this.makeAction}><i className="fa fa-coffee"></i>Email</button>
+                                            <button type="button" className="btn btn-default btn-sm btn-block" onClick={() => this.makeAction('email')}><i className="fa fa-coffee"></i>Email</button>
                                         </div>
                                         <div className="col-md-3">
                                             <button type="button" className="btn btn-default btn-sm btn-block" onClick={this.Delete}><i className="fa fa-coffee"></i>Delete</button>
