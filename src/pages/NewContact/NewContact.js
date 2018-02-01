@@ -46,7 +46,6 @@ class NewContact extends Component {
 
     }
     render() {
-        const defaultOption = this.state.options[0]
         return (
 
             <div className="ibox float-e-margins">

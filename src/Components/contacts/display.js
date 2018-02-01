@@ -7,28 +7,27 @@ class ContactsDisplay extends Component {
         this.state = {
             orignalContacts: this.props.contacts,
             filteredContacts: this.props.contacts,
-            serarchTerm: ''
+            searchTerm: ''
         }
-        this.doSearch = this.doSearch.bind(this)
-        console.log(this.state.orignalContacts)
+        //this.doSearch = this.doSearch.bind(this)
     }
 
     componentWillUpdate(nextProps, nextState) {
         this.state.contacts = nextProps.contacts
         nextState.orignalContacts = nextState.contacts
-        nextState.filteredContacts = nextState.contacts
-        console.log('Incoming', nextState)
+        //nextState.filteredContacts = nextState.contacts
     }
-    doSearch(evt) {
-        let searchedContacts = this.state.orignalContacts;
-        const searchTerm = evt.target.value;
-        if(searchTerm.length > 0)
-        {
-            searchedContacts = this.state.orignalContacts.filter( (contact) => contact.first_name.toLowerCase().includes(searchTerm.toLowerCase()) || contact.last_name.includes(searchTerm.toLowerCase()) )
-        }
-        this.setState({filteredContacts: searchedContacts})
+    // doSearch(evt) {
+    //     let searchedContacts = this.state.orignalContacts;
+    //     const searchTerm = evt.target.value;
+    //     if(searchTerm.length > 0)
+    //     {
+    //         searchedContacts = this.state.orignalContacts.filter( (contact) => contact.first_name.toLowerCase().includes(searchTerm.toLowerCase()) || contact.last_name.includes(searchTerm.toLowerCase()) )
+    //     }
+    //     console.log(searchedContacts)
+    //     this.setState({orignalContacts: searchedContacts})
 
-    }
+    // }
     render() {
         return (
             <div className="ibox float-e-margins">
@@ -42,23 +41,7 @@ class ContactsDisplay extends Component {
                     </div>
                 </div>
                 <div className="ibox-content">
-                    <div className="row">
-                        <div className="col-sm-9 m-b-xs">
-                            <div data-toggle="buttons" className="btn-group">
-                                <label className="btn btn-sm btn-white"> <input type="radio" id="option1" name="options" /> Day </label>
-                                <label className="btn btn-sm btn-white active"> <input type="radio" id="option2" name="options" /> Week </label>
-                                <label className="btn btn-sm btn-white"> <input type="radio" id="option3" name="options" /> Month </label>
-                            </div>
-                        </div>
-                        <div className="col-sm-3">
-                            <div className="input-group">
-                            <input onKeyUp={ (evt) => this.doSearch(evt)}
-                                   value={this.state.searchTerm}
-                             type="text"
-                             placeholder="Search"
-                             className="input-sm form-control"  /></div>
-                        </div>
-                    </div>
+
                     <div className="table-responsive">
                         <table className="table table-striped">
                             <thead>
@@ -72,7 +55,7 @@ class ContactsDisplay extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.filteredContacts.map(function (contact, idx) {
+                                {this.state.orignalContacts.map(function (contact, idx) {
                                     return (
 
                                         <tr key={idx}>

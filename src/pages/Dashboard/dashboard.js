@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ax from '../../config/axios'
-
-import Circles from '../../Components/Circles';
 //import mockContacts from '../../data/mock_contact_data';
 import Contacts from '../../Components/contacts/display';
 
@@ -44,7 +42,6 @@ class Dashboard extends Component {
                     <div className={this.state.contactsClass}>
                         <Contacts contacts={this.state.contacts} />
                     </div>
-                    {this.state.isCircleOpen ? <div className="col-md-4"> <Circles contacts={this.state.contacts} /> </div> : ''}
                 </div>
             </div>
         )
