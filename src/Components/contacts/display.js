@@ -13,7 +13,7 @@ class ContactsDisplay extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("here are the props ",nextProps)
+        //console.log("here are the props ",nextProps)
         this.state.filteredContacts = nextProps.contacts
         this.state.orignalContacts = nextProps.contacts
     }
@@ -25,7 +25,7 @@ class ContactsDisplay extends Component {
         {
             searchedContacts = this.state.orignalContacts.filter( (contact) => (contact.first_name.toLowerCase().includes(searchTerm.toLowerCase()) || contact.last_name.toLowerCase().includes(searchTerm.toLowerCase())) )
         }
-        console.log(searchedContacts)
+        //console.log(searchedContacts)
         this.setState({filteredContacts: searchedContacts, searchTerm: searchTerm})
 
     }
@@ -42,9 +42,9 @@ class ContactsDisplay extends Component {
                     </div>
                 </div>
                 <div className="ibox-content">
-                <div class="row m-b-sm m-t-sm">
-                  <div class="col-md-11">
-                    <div class="input-group"> <input type="text" placeholder="Search" value={this.state.searchTerm} onChange={this.doSearch} />
+                <div className="row m-b-sm m-t-sm">
+                  <div className="col-md-11">
+                    <div className="input-group"> <input type="text" placeholder="Search" value={this.state.searchTerm} onChange={this.doSearch} />
                     </div>
                 </div>
             </div>
