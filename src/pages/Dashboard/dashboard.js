@@ -40,14 +40,6 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                /* <div className="row">
-                    <div className="ibox">
-                        <div className="ibox-content">
-                            <button className="btn btn-white" onClick={this.toggleCircle}> Toggle Circles</button>
-                            <button className="btn btn-white" onClick={this.addNew}> Add New Contact</button>
-                        </div>
-                    </div>
-                </div> */
                 <div className='row'>
                     <div className={this.state.contactsClass}>
                         <Contacts contacts={this.state.contacts} />
