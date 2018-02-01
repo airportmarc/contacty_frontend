@@ -53,9 +53,9 @@ class Detail extends Component {
 
     }
 
-    editItem(style, id) {
+    editItem(style, id, text) {
 
-        this.setState({isAddItemOpen: true, updateId: id, addItemStyle: style })
+        this.setState({isAddItemOpen: true, updateId: id, addItemStyle: style, message: text})
 
     }
 
@@ -114,7 +114,7 @@ class Detail extends Component {
             phoneList  = this.state.contact.contact.phones.map( (phone, idx) => {
             return (<li key={phone.id}>{phone.number}
                     <i className="fa fa-minus" onClick={ () => this.deleteItem('phone', phone.id)}></i>
-                    <i className="fa fa-pencil" onClick={ () => this.editItem('phone', phone.id)}></i>
+                    <i className="fa fa-pencil" onClick={ () => this.editItem('phone', phone.id, phone.number)}></i>
                     </li>
             )
             })
@@ -123,7 +123,7 @@ class Detail extends Component {
             emailList  = this.state.contact.contact.emails.map( (email, idx) =>{
                     return (<li key={email.id}>{email.email}
                              <i className="fa fa-minus"  onClick={ () => this.deleteItem('email', email.id)}></i>
-                             <i className="fa fa-pencil"  onClick={ () => this.editItem('email', email.id)}></i>
+                             <i className="fa fa-pencil"  onClick={ () => this.editItem('email', email.id, email.email)}></i>
                              </li>
                     )
         })

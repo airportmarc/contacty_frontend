@@ -42,7 +42,7 @@ class NewContact extends Component {
         const payload = {
             user: this.state.user
         }
-        ax.post('/users', payload)
+        ax.post('/users', payload).then(res =>  this.props.history.push('/'))
 
     }
     render() {
@@ -95,16 +95,6 @@ class NewContact extends Component {
                                     <div className="col-sm-10">
                                         <input type="text" className="form-control"
                                          name="email" value={this.state.user.email} onChange={this.handleInput} />
-                                    </div>
-
-                                </div>
-                                <div className="hr-line-dashed"></div>
-                                <div className="form-group">
-                                    <label className="col-sm-2 control-label">Address</label>
-                                    <div className="col-sm-10">
-
-                                        <input type="text" className="form-control" name="address"
-                                        value={this.state.user.address} onChange={this.handleInput} />
                                     </div>
 
                                 </div>
