@@ -79,7 +79,7 @@ class ContactsDisplay extends Component {
 
                                             <td><Link to={`/detail/${contact.id}`}>{contact.first_name} </Link></td>
                                             <td>{contact.last_name}</td>
-                                            <td>{contact.contact.phones[0].number}</td>
+                                            <td>{ contact.contact ? contact.contact.phones[0].number : '-' }</td>
                                             <td>{contact.email}</td>
                                         </tr>
 
