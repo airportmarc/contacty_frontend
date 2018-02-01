@@ -6,28 +6,29 @@ class ContactsDisplay extends Component {
         super(props)
         this.state = {
             orignalContacts: this.props.contacts,
-            filteredContacts: this.props.contacts,
+            filteredContacts:[],
             searchTerm: ''
         }
-        //this.doSearch = this.doSearch.bind(this)
+        this.doSearch = this.doSearch.bind(this)
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        this.state.contacts = nextProps.contacts
-        nextState.orignalContacts = nextState.contacts
-        //nextState.filteredContacts = nextState.contacts
+    componentWillReceiveProps(nextProps) {
+        console.log("here are the props ",nextProps)
+        this.state.filteredContacts = nextProps.contacts
+        this.state.orignalContacts = nextProps.contacts
     }
-    // doSearch(evt) {
-    //     let searchedContacts = this.state.orignalContacts;
-    //     const searchTerm = evt.target.value;
-    //     if(searchTerm.length > 0)
-    //     {
-    //         searchedContacts = this.state.orignalContacts.filter( (contact) => contact.first_name.toLowerCase().includes(searchTerm.toLowerCase()) || contact.last_name.includes(searchTerm.toLowerCase()) )
-    //     }
-    //     console.log(searchedContacts)
-    //     this.setState({orignalContacts: searchedContacts})
 
-    // }
+    doSearch(evt) {
+        let searchedContacts = this.state.orignalContacts;
+        const searchTerm = evt.target.value;
+        if(searchTerm.length > 0)
+        {
+            searchedContacts = this.state.orignalContacts.filter( (contact) => (contact.first_name.toLowerCase().includes(searchTerm.toLowerCase()) || contact.last_name.toLowerCase().includes(searchTerm.toLowerCase())) )
+        }
+        console.log(searchedContacts)
+        this.setState({filteredContacts: searchedContacts, searchTerm: searchTerm})
+
+    }
     render() {
         return (
             <div className="ibox float-e-margins">
@@ -41,6 +42,13 @@ class ContactsDisplay extends Component {
                     </div>
                 </div>
                 <div className="ibox-content">
+                <div class="row m-b-sm m-t-sm">
+                  <div class="col-md-11">
+                    <div class="input-group"> <input type="text" placeholder="Search" value={this.state.searchTerm} onChange={this.doSearch} />
+                    </div>
+                </div>
+            </div>
+
 
                     <div className="table-responsive">
                         <table className="table table-striped">
@@ -55,7 +63,7 @@ class ContactsDisplay extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.orignalContacts.map(function (contact, idx) {
+                                {this.state.filteredContacts.map(function (contact, idx) {
                                     return (
 
                                         <tr key={idx}>
