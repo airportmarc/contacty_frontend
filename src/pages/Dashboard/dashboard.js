@@ -13,7 +13,7 @@ class Dashboard extends Component {
             contactsClass: 'col-md-12',
             contacts: [],
         }
-        this.toggleCircle = this.toggleCircle.bind(this)
+        //this.toggleCircle = this.toggleCircle.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
     }
 
@@ -31,23 +31,23 @@ class Dashboard extends Component {
 
     }
 
-    toggleCircle() {
-        this.setState({ isCircleOpen: !this.state.isCircleOpen }, () => {
-            //adding a call back to ensure state has been changed.
-            { this.state.isCircleOpen ? this.setState({ contactsClass: 'col-md-8' }) : this.setState({ contactsClass: 'col-md-12' }) }
-        })
-    }
+    // toggleCircle() {
+    //     this.setState({ isCircleOpen: !this.state.isCircleOpen }, () => {
+    //         //adding a call back to ensure state has been changed.
+    //         { this.state.isCircleOpen ? this.setState({ contactsClass: 'col-md-8' }) : this.setState({ contactsClass: 'col-md-12' }) }
+    //     })
+    // }
     render() {
         return (
             <div>
-                <div className="row">
+                /* <div className="row">
                     <div className="ibox">
                         <div className="ibox-content">
                             <button className="btn btn-white" onClick={this.toggleCircle}> Toggle Circles</button>
                             <button className="btn btn-white" onClick={this.addNew}> Add New Contact</button>
                         </div>
                     </div>
-                </div>
+                </div> */
                 <div className='row'>
                     <div className={this.state.contactsClass}>
                         <Contacts contacts={this.state.contacts} />
